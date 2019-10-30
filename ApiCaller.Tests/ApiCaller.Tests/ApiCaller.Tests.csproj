@@ -50,6 +50,10 @@
       <Project>{2db3a473-b726-42bf-93de-66e7933ddab7}</Project>
       <Name>ApiCaller</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\LyricsFormatter\LyricsFormatter\LyricsFormatter.csproj">
+      <Project>{29656e8d-bb8a-4aa1-a71f-1373bdc36e1c}</Project>
+      <Name>LyricsFormatter</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
