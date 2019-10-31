@@ -49,7 +49,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\ApiCaller\Common\Common.csproj">
+    <ProjectReference Include="..\..\Common\Common.csproj">
       <Project>{2566c115-9ead-4282-8024-43a743f96b79}</Project>
       <Name>Common</Name>
     </ProjectReference>
