@@ -11,7 +11,7 @@ namespace ApiCaller.Tests
     {
         [Test]
         public void ApiCaller_FindArtist_Queen_ReturnsExpectedData()
-        {
+        { 
             List<int> totalWordCount = new List<int>();
            ApiCaller apiCaller = new ApiCaller();
            LyricFormatter lyricFormatter = new LyricFormatter();

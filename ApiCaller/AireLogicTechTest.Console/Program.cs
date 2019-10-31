@@ -1,35 +1,46 @@
-﻿using ProgramRunner;
+﻿using System;
+using Common;
+using ProgramRunner;
 
-namespace AireLogicTechTest.Console
+namespace AireLogicTechTest.UI
 {
     class Program
     {
-        private Runner runner;
-        
+        private Runner _runner;
         static void Main(string[] args)
         {
             Program p = new Program();
-            p.setup();
-            p.print("Please enter an artist name:");
-            string artistName = System.Console.ReadLine();
-            double result = p.runner.FindAverageNumberOfWordsByArtistName(artistName);
-            p.print($"Result: {result}");
+            p.Setup();
+            Print("Please enter an artist name:");
+            string artistName;
+            do
+            {
+                artistName = Console.ReadLine();
+                if(string.IsNullOrWhiteSpace(artistName)) Print("Artist name cannot be null or whitespace. Try again");
+            } while (string.IsNullOrWhiteSpace(artistName));
+
+            int result = p._runner.FindAverageNumberOfWordsByArtistName(artistName);
+            if (result != 0)
+            {
+                Console.ForegroundColor = ConsoleColor.Green;
+                Print($"Result: {result} average words per song.");
+            }
         }
 
-        private void setup()
+        private void Setup()
         {
-            runner = new Runner();
-            runner.MessageLogged += RunnerOnMessageLogged;
+            _runner = new Runner();
+            _runner.MessageLogged += RunnerOnMessageLogged;
         }
 
-        private void RunnerOnMessageLogged(object sender, MessageEventArgs e)
+        private static void RunnerOnMessageLogged(object sender, MessageEventArgs messageEventArgs)
         {
-            print(e.Message);
+            Print($"Log: {messageEventArgs.Message}");
         }
 
-        private void print(string message)
+        private static void Print(string message)
         {
-            System.Console.WriteLine(message);
+            Console.WriteLine(message);
         }
     }
 }
