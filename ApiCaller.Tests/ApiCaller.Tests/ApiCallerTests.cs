@@ -20,7 +20,6 @@ namespace ApiCaller.Tests
            foreach (string songTitle in songTitles)
            {
                //Only add item to word count if lyrics found.
-
                string lyrics = apiCaller.FindLyricsByArtistAndTitle(songTitle);
                
                if(!string.IsNullOrWhiteSpace(lyrics)) totalWordCount.Add(lyricFormatter.GetTotalNumberOfWords(lyrics));
