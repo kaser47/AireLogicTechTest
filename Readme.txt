@@ -1,6 +1,7 @@
 Instruction To Run:
-- Goto  “AireLogicTechTest\Compiled Tech Test\AireLogicTechTest.UI.exe”
-- Run
+Go to releases download ALTT.zip
+Unzip
+- Run "AireLogicTechTest.UI.exe"
 - Type artist name
 
 Summary of project
