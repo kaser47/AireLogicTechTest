@@ -11,16 +11,8 @@ using Newtonsoft.Json;
 
 namespace ApiCaller
 {
-    public static class ApiCallerConsts{
-        public static string userAgent = "ApiCaller/1.0 (kaser47@hotmail.com)";
-        public static string artistApiCaller = "https://musicbrainz.org/ws/2/artist?limit=1&query=";
-        public static string songTitleApiCaller = "https://beta.musicbrainz.org/ws/2/work/?limit=100&artist=";
-        public static string lyricsApiCaller = "https://api.lyrics.ovh/v1/";
-    }
-
     public class ApiCaller
     {
-        private string _artist;
         public event EventHandler<MessageEventArgs> ApiMessageLogged;
 
         public ApiCaller()
@@ -29,8 +21,10 @@ namespace ApiCaller
 
         public Guid FindArtist(string artistName)
         {
+            if(string.IsNullOrWhiteSpace(artistName)) return Guid.Empty;
+            
             Log($"Starting first api call. Finding Artist '{artistName}'");
-            _artist = HttpUtility.UrlPathEncode(artistName);
+            artistName = HttpUtility.UrlPathEncode(artistName);
             HttpClient client = new HttpClient();
 
             client.BaseAddress = new Uri(ApiCallerConsts.artistApiCaller);
@@ -38,7 +32,7 @@ namespace ApiCaller
             client.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json"));
 
-            Uri requestUri = new Uri($"{ApiCallerConsts.artistApiCaller}" + _artist);
+            Uri requestUri = new Uri($"{ApiCallerConsts.artistApiCaller}" + artistName);
             client.DefaultRequestHeaders.Add("User-Agent", ApiCallerConsts.userAgent);
 
             dynamic data = null;
@@ -65,6 +59,7 @@ namespace ApiCaller
 
         public List<string> FindSongTitlesByArtist(Guid artistId)
         {
+            if(artistId == Guid.Empty) return null;
             Log($"Starting second api call. Finding Titles by using id = '{artistId}'");
             HttpClient client = new HttpClient();
 
@@ -91,6 +86,8 @@ namespace ApiCaller
                     data = JsonConvert.DeserializeObject(jsonString.Result);
                 });
                 task.Wait();
+
+                if (data.works == null) return null;
                 
                 foreach (dynamic work in data.works)
                 {
@@ -108,8 +105,10 @@ namespace ApiCaller
             return songTitles;
         }
 
-        public string FindLyricsByArtistAndTitle(string title)
+        public string FindLyricsByArtistAndTitle(string artist, string title)
         {
+            if (string.IsNullOrWhiteSpace(artist) || string.IsNullOrWhiteSpace(title)) return null;
+            
             Log($"Started to find lyrics for '{title}'");
             string encodedTitle = HttpUtility.UrlPathEncode(title);
             HttpClient client = new HttpClient();
@@ -118,7 +117,7 @@ namespace ApiCaller
             
             dynamic data = null;
 
-            Uri requestUri = new Uri($"{ApiCallerConsts.lyricsApiCaller}{_artist}/{encodedTitle}");
+            Uri requestUri = new Uri($"{ApiCallerConsts.lyricsApiCaller}{artist}/{encodedTitle}");
             client.DefaultRequestHeaders.Add("User-Agent", ApiCallerConsts.userAgent);
 
 

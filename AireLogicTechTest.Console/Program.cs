@@ -25,6 +25,9 @@ namespace AireLogicTechTest.UI
                 Console.ForegroundColor = ConsoleColor.Green;
                 Print($"Result: {result} average words per song.");
             }
+            
+            Print("Press ANY key to exit.");
+            Console.ReadKey(true);
         }
 
         private void Setup()

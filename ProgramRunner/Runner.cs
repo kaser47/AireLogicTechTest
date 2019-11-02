@@ -41,7 +41,7 @@ namespace ProgramRunner
             
             foreach (string songTitle in songTitles)
             {
-                string lyrics = _apiCaller.FindLyricsByArtistAndTitle(songTitle);
+                string lyrics = _apiCaller.FindLyricsByArtistAndTitle(artistName, songTitle);
                 if(!string.IsNullOrWhiteSpace(lyrics)) totalWordCount.Add(_lyricFormatter.GetTotalNumberOfWords(lyrics));
             }
 
