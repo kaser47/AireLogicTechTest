@@ -54,7 +54,7 @@
       <Project>{2566c115-9ead-4282-8024-43a743f96b79}</Project>
       <Name>Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\LyricsFormatter\LyricsFormatter\LyricsFormatter.csproj">
+    <ProjectReference Include="..\LyricsFormatter\LyricsFormatter.csproj">
       <Project>{29656e8d-bb8a-4aa1-a71f-1373bdc36e1c}</Project>
       <Name>LyricsFormatter</Name>
     </ProjectReference>
