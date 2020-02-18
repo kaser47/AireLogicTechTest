@@ -1,3 +1,5 @@
+Objective: Produce a program which, when given the name of an artist, will produce the average number of words in their songs. It must connect to the 2 APIs in the specification.
+
 Instruction To Run:
 Go to releases download ALTT.zip
 Unzip
